@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>බ/විද්‍යාලෝක ප්‍රාථමික විද්‍යාලය - කැප්පෙටිපොල</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;500;600;700;900&family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2f3094',
+            'primary-dark': '#1e1f6b',
+            'primary-light': '#4748c4',
+            accent: '#f5a623',
+            'light-bg': '#f4f5fb',
+            brand: '#1a1a2e',
+          },
+          fontFamily: {
+            sinhala: ['"Noto Sans Sinhala"', 'sans-serif'],
+            'sinhala-serif': ['"Noto Serif Sinhala"', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans Sinhala', sans-serif; }
+    .font-serif-sinhala { font-family: 'Noto Serif Sinhala', serif; }
+    .hero-pattern {
+      background-image: repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);
+      background-size: 20px 20px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .vm-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:#2f3094; }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="text-brand bg-white overflow-x-hidden" x-data="{ mobileOpen: false }">
+
+  <!-- NAVBAR -->
+  <nav class="bg-white shadow-[0_2px_20px_rgba(47,48,148,0.1)] sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-[72px]">
+      <a href="#home" class="flex items-center gap-3.5 no-underline">
+        <div class="w-[52px] h-[52px] bg-primary rounded-full flex items-center justify-center border-[3px] border-accent shrink-0">
+          <svg class="w-[30px] h-[30px] fill-white" viewBox="0 0 24 24">
+            <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 12.5L5.5 12 12 8.5l6.5 3.5L12 15.5zm0 2.5l-7-3.82V17c0 2.21 3.13 4 7 4s7-1.79 7-4v-2.32L12 18z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="font-serif-sinhala text-[0.95rem] font-bold text-primary leading-tight">බ/විද්‍යාලෝක ප්‍රාථමික විද්‍යාලය</h1>
+          <p class="text-[0.7rem] text-gray-500 font-normal">කැප්පෙටිපොල, ශ්‍රී ලංකාව</p>
+        </div>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-0 list-none">
+        <li><a href="#home" class="px-3.5 py-2 text-brand text-[0.82rem] font-medium rounded-md transition-all hover:bg-light-bg hover:text-primary no-underline bg-primary text-white">මුල් පිටුව</a></li>
+        <li><a href="#about" class="px-3.5 py-2 text-brand text-[0.82rem] font-medium rounded-md transition-all hover:bg-light-bg hover:text-primary no-underline">අප ගැන</a></li>
+        <li><a href="#vision" class="px-3.5 py-2 text-brand text-[0.82rem] font-medium rounded-md transition-all hover:bg-light-bg hover:text-primary no-underline">දැක්ම</a></li>
+        <li><a href="#history" class="px-3.5 py-2 text-brand text-[0.82rem] font-medium rounded-md transition-all hover:bg-light-bg hover:text-primary no-underline">ඉතිහාසය</a></li>
+        <li><a href="#activities" class="px-3.5 py-2 text-brand text-[0.82rem] font-medium rounded-md transition-all hover:bg-light-bg hover:text-primary no-underline">ක්‍රියාකාරකම්</a></li>
+        <li><a href="#gallery" class="px-3.5 py-2 text-brand text-[0.82rem] font-medium rounded-md transition-all hover:bg-light-bg hover:text-primary no-underline">ඡායාරූප</a></li>
+        <li><a href="#staff" class="px-3.5 py-2 text-brand text-[0.82rem] font-medium rounded-md transition-all hover:bg-light-bg hover:text-primary no-underline">කාර්ය මණ්ඩලය</a></li>
+        <li><a href="#contact" class="px-3.5 py-2 bg-accent text-brand text-[0.82rem] font-bold rounded-md transition-all hover:shadow-lg no-underline">අමතන්න</a></li>
+      </ul>
+
+      <button class="lg:hidden bg-transparent border-none cursor-pointer text-primary text-2xl" @click="mobileOpen = !mobileOpen">
+        <i :class="mobileOpen ? 'fas fa-times' : 'fas fa-bars'"></i>
+      </button>
+    </div>
+
+    <div class="lg:hidden border-t border-gray-200 px-6 py-4" :class="{ 'block': mobileOpen, 'hidden': !mobileOpen }">
+      <a href="#home" @click="mobileOpen=false" class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100">🏠 මුල් පිටුව</a>
+      <a href="#about" @click="mobileOpen=false" class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100">📚 අප ගැන</a>
+      <a href="#vision" @click="mobileOpen=false" class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100">🎯 දැක්ම හා මෙහෙවර</a>
+      <a href="#history" @click="mobileOpen=false" class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100">📖 ඉතිහාසය</a>
+      <a href="#activities" @click="mobileOpen=false" class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100">🎨 ක්‍රියාකාරකම්</a>
+      <a href="#gallery" @click="mobileOpen=false" class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100">📸 ඡායාරූප</a>
+      <a href="#staff" @click="mobileOpen=false" class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100">👨‍🏫 කාර්ය මණ්ඩලය</a>
+      <a href="#contact" @click="mobileOpen=false" class="block py-2.5 text-brand no-underline text-[0.9rem]">📞 අමතන්න</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary-dark to-[#0d0e40] text-white">
+    <div class="hero-pattern absolute inset-0 opacity-[0.04]"></div>
+    <div class="absolute rounded-full bg-white/[0.03] w-[600px] h-[600px] -top-[200px] -right-[150px]"></div>
+    <div class="absolute rounded-full bg-white/[0.03] w-[400px] h-[400px] -bottom-[100px] -left-[100px]"></div>
+
+    <div class="max-w-6xl mx-auto px-6 py-24 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-accent/15 border border-accent/40 text-accent text-[0.8rem] px-4 py-1.5 rounded-full mb-6 font-semibold">
+          <i class="fas fa-star"></i>
+          කැප්පෙටිපොල නගරයේ ප්‍රාථමික පාසල
+        </div>
+        <h1 class="font-serif-sinhala text-[2.6rem] font-black leading-[1.25] mb-4">
+          බ/විද්‍යාලෝක<br><span class="text-accent">ප්‍රාථමික විද්‍යාලය</span>
+        </h1>
+        <p class="text-[1rem] opacity-85 leading-[1.8] mb-8">
+          දරුවන්ගේ අනාගත ජීවිතය සාර්ථකව ගොඩනඟා ගැනීමට අවශ්‍ය
+          ශ්‍රේෂ්ඨ දැනුම, නිපුණතා සහ ගුණාත්මක හරි‌ ලබා දෙන
+          ශ්‍රී ලාංකේය ශිෂ්‍ය‌ ජීවිතයේ ආලෝකය.
+        </p>
+        <div class="flex gap-4 flex-wrap">
+          <a href="#about" class="bg-accent text-brand px-8 py-3.5 rounded-lg font-bold text-[0.9rem] no-underline transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(245,166,35,0.4)]">අප ගැන දැනගන්න</a>
+          <a href="#contact" class="border-2 border-white/40 text-white px-8 py-3.5 rounded-lg font-semibold text-[0.9rem] no-underline transition-all hover:border-white hover:bg-white/10">අප හා සම්බන්ධ වන්න</a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="bg-white/[0.08] border border-white/[0.12] backdrop-blur-sm rounded-2xl p-6 text-center">
+          <span class="font-serif-sinhala text-[2.2rem] font-black text-accent block leading-none">800+</span>
+          <span class="text-[0.8rem] opacity-80 mt-1.5 block">දරුවන් සංඛ්‍යාව</span>
+        </div>
+        <div class="bg-white/[0.08] border border-white/[0.12] backdrop-blur-sm rounded-2xl p-6 text-center">
+          <span class="font-serif-sinhala text-[2.2rem] font-black text-accent block leading-none">27</span>
+          <span class="text-[0.8rem] opacity-80 mt-1.5 block">ගුරු සාමාජිකයෝ</span>
+        </div>
+        <div class="bg-white/[0.08] border border-white/[0.12] backdrop-blur-sm rounded-2xl p-6 text-center">
+          <span class="font-serif-sinhala text-[2.2rem] font-black text-accent block leading-none">2012</span>
+          <span class="text-[0.8rem] opacity-80 mt-1.5 block">ස්ථාපිත වූ වර්ෂය</span>
+        </div>
+        <div class="bg-white/[0.08] border border-white/[0.12] backdrop-blur-sm rounded-2xl p-6 text-center">
+          <span class="font-serif-sinhala text-[2.2rem] font-black text-accent block leading-none">1–5</span>
+          <span class="text-[0.8rem] opacity-80 mt-1.5 block">ශ්‍රේණි</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="bg-white rounded-2xl h-[380px] flex items-center justify-center relative overflow-hidden">
+          <!-- <div class="absolute w-[250px] h-[250px] rounded-full bg-white/[0.05] -top-[60px] -right-[60px]"></div>
+          <div class="w-[120px] h-[120px] bg-white/15 rounded-full border-4 border-white/30 flex items-center justify-center z-10">
+            <svg class="w-[60px] h-[60px] fill-white/80" viewBox="0 0 24 24">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 12.5L5.5 12 12 8.5l6.5 3.5L12 15.5zm0 2.5l-7-3.82V17c0 2.21 3.13 4 7 4s7-1.79 7-4v-2.32L12 18z"/>
+            </svg>
+          </div> -->
+          <img src="./images/school-logo.jpg" alt="" class="h-full w-auto" />
+        </div>
+
+        <div>
+          <span class="inline-block bg-primary/[0.08] text-primary text-[0.75rem] font-bold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">අප ගැන</span>
+          <h2 class="font-serif-sinhala text-[2rem] font-bold text-primary mb-4 leading-[1.3]">ශ්‍රේෂ්ඨ ශිෂ්‍යයින් ලොවට දෙන පාසල</h2>
+          <div class="w-[50px] h-1 bg-accent rounded mb-8"></div>
+          <p class="text-gray-500 leading-[1.9] mb-5 text-[0.95rem]">
+            ක/ව/ල/ය ජාතික විශ්වවිද්‍යාලය ලෙස 2012 සිටම කැප්පෙටිපොල දකුණු ප්‍රදේශයේ
+            ශ්‍රේෂ්ඨ දරුවන්ට ඉගෙනුම ලබාදෙමින් ඉදිරියට යයි.
+          </p>
+          <p class="text-gray-500 leading-[1.9] mb-5 text-[0.95rem]">
+            ජාතික මට්ටමේ විෂය සමගාමී තරඟ සහ විභාග වලින් විශිෂ්ඨ
+            ජය ග්‍රහණ අත්පත් කරගනිමින් විද්‍යාලයට රටට ද කීර්තියක්
+            අත්පත් කර ද ඇත.
+          </p>
+          <div class="flex flex-wrap gap-2.5 mt-6">
+            <span class="bg-light-bg border border-primary/10 text-primary text-[0.8rem] font-semibold px-4 py-1.5 rounded-full">🏛️ 2012 ස්ථාපිතයි</span>
+            <span class="bg-light-bg border border-primary/10 text-primary text-[0.8rem] font-semibold px-4 py-1.5 rounded-full">📚 ශ්‍රේණි 1 - 5</span>
+            <span class="bg-light-bg border border-primary/10 text-primary text-[0.8rem] font-semibold px-4 py-1.5 rounded-full">👨‍🎓 ජාතික ජයග්‍රාහකයෝ</span>
+            <span class="bg-light-bg border border-primary/10 text-primary text-[0.8rem] font-semibold px-4 py-1.5 rounded-full">🏆 ප්‍රාදේශීය ප්‍රසිද්ධ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION MISSION -->
+  <section id="vision" class="py-20 px-6 bg-light-bg">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center">
+        <span class="inline-block bg-primary/[0.08] text-primary text-[0.75rem] font-bold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">අපේ දැක්ම</span>
+        <h2 class="font-serif-sinhala text-[2rem] font-bold text-primary mb-4 leading-[1.3]">දැක්ම, මෙහෙවර සහ අරමුණ</h2>
+        <div class="w-[50px] h-1 bg-accent rounded mx-auto mb-0"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+        <!-- Card -->
+        <div class="vm-card bg-white rounded-2xl p-10 border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(47,48,148,0.12)] relative overflow-hidden">
+          <div class="w-[60px] h-[60px] bg-primary/[0.08] rounded-[14px] flex items-center justify-center mb-6 text-[1.6rem]">🌟</div>
+          <h3 class="font-serif-sinhala text-[1.1rem] font-bold text-primary mb-4">අපේ දැක්ම</h3>
+          <p class="text-gray-500 leading-[1.8] text-[0.88rem]">අනාගත අභියෝග ජයගත හැකි නිපුණතා පිරි දරුවෙකි. ශිෂ්‍යයා ජාතිය හා ලෝකයේ ශ්‍රේෂ්ඨ පුරවැසියෙකු ලෙස ගොඩනෑමීම අපේ ශ්‍රේෂ්ඨ දැක්ම.</p>
+        </div>
+        <div class="vm-card bg-white rounded-2xl p-10 border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(47,48,148,0.12)] relative overflow-hidden">
+          <div class="w-[60px] h-[60px] bg-primary/[0.08] rounded-[14px] flex items-center justify-center mb-6 text-[1.6rem]">💫</div>
+          <h3 class="font-serif-sinhala text-[1.1rem] font-bold text-primary mb-4">අපේ මෙහෙවර</h3>
+          <p class="text-gray-500 leading-[1.8] text-[0.88rem]">මානව හා භෞතික සම්පත් ළදායී ලෙස යොදාගනිමින් විශ්ව සමාජයට විශිෂ්ඨයන් බිහි කිරීම උදෙසා ඉහළම කාර්යක්ෂමතාවයකින් කටයුතු කිරීම.</p>
+        </div>
+        <div class="vm-card bg-white rounded-2xl p-10 border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(47,48,148,0.12)] relative overflow-hidden">
+          <div class="w-[60px] h-[60px] bg-primary/[0.08] rounded-[14px] flex items-center justify-center mb-6 text-[1.6rem]">🎯</div>
+          <h3 class="font-serif-sinhala text-[1.1rem] font-bold text-primary mb-4">අපේ අරමුණ</h3>
+          <p class="text-gray-500 leading-[1.8] text-[0.88rem]">කලාපය තුළ විශිෂ්ඨ පාසලක් ලෙස ප්‍රතිනිමාව ලීම. ශිෂ්‍යයාගේ සෞඛ්‍ය, ක්‍රීඩා, ශාස්ත්‍ර හා කලා දක්ෂතා ප්‍රශස්ත ලෙස ගොඩනැඟීම.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOALS -->
+  <section id="goals" class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <span class="inline-block bg-primary/[0.08] text-primary text-[0.75rem] font-bold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">ඉලක්ක</span>
+      <h2 class="font-serif-sinhala text-[2rem] font-bold text-primary mb-4 leading-[1.3]">පාසලේ ඉලක්ක</h2>
+      <div class="w-[50px] h-1 bg-accent rounded mb-8"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="flex items-start gap-4 p-5 bg-light-bg rounded-xl">
+          <div class="w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0">1</div>
+          <p class="text-gray-500 text-[0.9rem] leading-[1.7]">භෞතික සම්පත් අවශ්‍යතාවන් සම්පූර්ණ කර ගැනීම.</p>
+        </div>
+        <div class="flex items-start gap-4 p-5 bg-light-bg rounded-xl">
+          <div class="w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0">2</div>
+          <p class="text-gray-500 text-[0.9rem] leading-[1.7]">ශිෂ්‍ය සාධනය පවතින මට්ටමින් 10% වර්ධනය කිරීම.</p>
+        </div>
+        <div class="flex items-start gap-4 p-5 bg-light-bg rounded-xl">
+          <div class="w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0">3</div>
+          <p class="text-gray-500 text-[0.9rem] leading-[1.7]">නිසි වේලාවට සියල්ල සම්පූර්ණ කිරීම.</p>
+        </div>
+        <div class="flex items-start gap-4 p-5 bg-light-bg rounded-xl">
+          <div class="w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0">4</div>
+          <p class="text-gray-500 text-[0.9rem] leading-[1.7]">මානව සම්පත් අවශ්‍යතාවන් පිරිපූර්ණ කර ගැනීම.</p>
+        </div>
+        <div class="flex items-start gap-4 p-5 bg-light-bg rounded-xl">
+          <div class="w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0">5</div>
+          <p class="text-gray-500 text-[0.9rem] leading-[1.7]">භෞෂණය භාවිතය වැඩි කිරීම.</p>
+        </div>
+        <div class="flex items-start gap-4 p-5 bg-light-bg rounded-xl">
+          <div class="w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0">6</div>
+          <p class="text-gray-500 text-[0.9rem] leading-[1.7]">ශිෂ්‍යාභ ප්‍රතිඵල 100% ලෙස අඛණ්ඩව පවත්වා ගැනීම.</p>
+        </div>
+        <div class="flex items-start gap-4 p-5 bg-light-bg rounded-xl sm:col-span-2">
+          <div class="w-9 h-9 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0">7</div>
+          <p class="text-gray-500 text-[0.9rem] leading-[1.7]">පාසල පිළිබඳ ප්‍රජාවේ ධනාත්මක විශ්වාසය වර්ධනය කිරීම.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section id="history" class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <span class="inline-block bg-primary/[0.08] text-primary text-[0.75rem] font-bold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">ඉතිහාසය</span>
+      <h2 class="font-serif-sinhala text-[2rem] font-bold text-primary mb-4 leading-[1.3]">පාසලේ ඉතිහාසය</h2>
+      <div class="w-[50px] h-1 bg-accent rounded mb-8"></div>
+      <div class="max-w-3xl">
+        <p class="text-gray-500 leading-[1.95] mb-6 text-[0.95rem]">
+          කැප්පෙටිපොල නගරයේ ප්‍රාරම්භිත පාසලක් වන බ/කැප්පෙටිපොල මහ විද්‍යාලය ඉතිහාස ගත
+          වනු ඇත. පාසල පටන් ගත් ද පටන් ප්‍රාථමික අංශය ළම පාසලේ එක් අංශයක් ව පැවතිනි.
+          ළමා ගණත්‍රය හා ප්‍රදේශයේ අවශ්‍යතාම මෙන්ම අධ්‍යාපන අමාත්‍යාංශයේ ප්‍රතිපත්තිය
+          අනුව 2012 වර්ෂෙදී වෙනම ප්‍රාථමික අංශකට පාසල වෙන් කරා ගෙන යාමට කටයුතු
+          සම්පාදනය කරන ලදී.
+        </p>
+        <p class="text-gray-500 leading-[1.95] mb-6 text-[0.95rem]">
+          බ/විද්‍යාලෝක ප්‍රාථමික විද්‍යාලය ලෙස 2012 සිට මේ දකුණු ප්‍රදේශයේ ශ්‍රේෂ්ඨ
+          දරුවන්ට ඉගෙනුම ලබා දෙමින් ජනප්‍රිය පාසලක් බවට පත් ඇත. දිනෙන් දිනා
+          ළමුන්ගේ ප්‍රමිස්සිම වර්ධනය වෙමින් අද වන විට දරුවන් 800 කට ළඟලොයි.
+        </p>
+        <p class="text-gray-500 leading-[1.95] mb-6 text-[0.95rem]">
+          ජාතික මට්ටමේ විෂය සමගාමී තරඟ සහ විභාග වලින් විශිෂ්ඨ ජය ග්‍රහණ
+          අත්පත් කරගනිමින් විද්‍යාලයට රටට ද කීර්තියක් අත්පත් කර ද ඇත.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="activities" class="py-20 px-6 bg-light-bg">
+    <div class="max-w-6xl mx-auto">
+      <span class="inline-block bg-primary/[0.08] text-primary text-[0.75rem] font-bold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">ක්‍රියාකාරකම්</span>
+      <h2 class="font-serif-sinhala text-[2rem] font-bold text-primary mb-4 leading-[1.3]">පාසලේ ක්‍රියාකාරකම්</h2>
+      <div class="w-[50px] h-1 bg-accent rounded mb-8"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-2">
+        <div class="bg-white rounded-[14px] overflow-hidden border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(47,48,148,0.1)]">
+          <div class="h-40 bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-5xl">📚</div>
+          <div class="p-5">
+            <h3 class="text-[0.95rem] font-bold text-primary mb-2">ශාස්ත්‍රීය ක්‍රියාකාරකම්</h3>
+            <p class="text-[0.82rem] text-gray-500 leading-[1.6]">ගණිතය, සිංහල, ඉංග්‍රීසි ඇතුළු සියලු විෂයයන් ශ්‍රේෂ්ඨ ගුරු මඟ‌ පෙන්වීම යටතේ ඉගෙනීම.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-[14px] overflow-hidden border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(47,48,148,0.1)]">
+          <div class="h-40 bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-5xl">🏏</div>
+          <div class="p-5">
+            <h3 class="text-[0.95rem] font-bold text-primary mb-2">ක්‍රීඩා</h3>
+            <p class="text-[0.82rem] text-gray-500 leading-[1.6]">ක්‍රිකට්, ෆ්‍රොලොබෝල්, කබඩි, සහ නේට් බෝල් ඇතුළු විවිධ ක්‍රීඩා ජාතික මට්ටමට.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-[14px] overflow-hidden border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(47,48,148,0.1)]">
+          <div class="h-40 bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-5xl">🎨</div>
+          <div class="p-5">
+            <h3 class="text-[0.95rem] font-bold text-primary mb-2">කලා ක්‍රියාකාරකම්</h3>
+            <p class="text-[0.82rem] text-gray-500 leading-[1.6]">සිතුවම්, ගැයුම, නැටුම, නාට්‍ය ක්‍රියාකාරකම් ශිෂ්‍ය ප්‍රතිභාව සොයා ගැනීමට.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-[14px] overflow-hidden border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(47,48,148,0.1)]">
+          <div class="h-40 bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-5xl">🔬</div>
+          <div class="p-5">
+            <h3 class="text-[0.95rem] font-bold text-primary mb-2">විද්‍යා ව්‍යාපෘති</h3>
+            <p class="text-[0.82rem] text-gray-500 leading-[1.6]">ළමා නිර්මාණශීලීතාව සහ ගවේෂණ ශෛලිය දිරිගන්වන විද්‍යා ව්‍යාපෘති සහ ප්‍රදර්ශන.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-[14px] overflow-hidden border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(47,48,148,0.1)]">
+          <div class="h-40 bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-5xl">🌿</div>
+          <div class="p-5">
+            <h3 class="text-[0.95rem] font-bold text-primary mb-2">පරිසර ව්‍යාපෘති</h3>
+            <p class="text-[0.82rem] text-gray-500 leading-[1.6]">ශාලාව, ගොවිතැන, ගස් රෝපනය ඇතුළු හරිත පාසල් කාර්යක්ෂමතාව.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-[14px] overflow-hidden border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(47,48,148,0.1)]">
+          <div class="h-40 bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-5xl">🎭</div>
+          <div class="p-5">
+            <h3 class="text-[0.95rem] font-bold text-primary mb-2">සංස්කෘතික ව්‍යාපෘති</h3>
+            <p class="text-[0.82rem] text-gray-500 leading-[1.6]">වෙසක්, ජාතික දිනය, ශිෂ්‍ය ශ්‍රී ලාංකීය සංස්කෘතිය ප්‍රදර්ශනය කරන වාර්ෂික නිෂ්පාදන.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <span class="inline-block bg-primary/[0.08] text-primary text-[0.75rem] font-bold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">ඡායාරූප</span>
+      <h2 class="font-serif-sinhala text-[2rem] font-bold text-primary mb-4 leading-[1.3]">ඡායාරූප ගැලරිය</h2>
+      <div class="w-[50px] h-1 bg-accent rounded mb-8"></div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-2">
+        <div class="gallery-item relative rounded-xl overflow-hidden aspect-square bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-5xl cursor-pointer transition-all hover:scale-[1.02] row-span-2">
+          🏫
+          <div class="gallery-overlay absolute inset-0 bg-primary/70 flex items-center justify-center opacity-0 transition-opacity text-white text-[0.85rem] font-semibold">📸 පාසල් ගොඩනැඟිල්ල</div>
+        </div>
+        <div class="gallery-item relative rounded-xl overflow-hidden aspect-square bg-gradient-to-br from-primary-dark to-primary flex items-center justify-center text-5xl cursor-pointer transition-all hover:scale-[1.02]">
+          🎒
+          <div class="gallery-overlay absolute inset-0 bg-primary/70 flex items-center justify-center opacity-0 transition-opacity text-white text-[0.85rem] font-semibold">📸 ශිෂ්‍යයෝ</div>
+        </div>
+        <div class="gallery-item relative rounded-xl overflow-hidden aspect-square bg-gradient-to-br from-primary-light to-gray-500 flex items-center justify-center text-5xl cursor-pointer transition-all hover:scale-[1.02] col-span-2">
+          🏆
+          <div class="gallery-overlay absolute inset-0 bg-primary/70 flex items-center justify-center opacity-0 transition-opacity text-white text-[0.85rem] font-semibold">📸 ජය ග්‍රහණ</div>
+        </div>
+        <div class="gallery-item relative rounded-xl overflow-hidden aspect-square bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-5xl cursor-pointer transition-all hover:scale-[1.02]">
+          🌿
+          <div class="gallery-overlay absolute inset-0 bg-primary/70 flex items-center justify-center opacity-0 transition-opacity text-white text-[0.85rem] font-semibold">📸 ගෙවතු</div>
+        </div>
+        <div class="gallery-item relative rounded-xl overflow-hidden aspect-square bg-gradient-to-br from-accent to-red-500 flex items-center justify-center text-5xl cursor-pointer transition-all hover:scale-[1.02]">
+          🎨
+          <div class="gallery-overlay absolute inset-0 bg-primary/70 flex items-center justify-center opacity-0 transition-opacity text-white text-[0.85rem] font-semibold">📸 කලා</div>
+        </div>
+        <div class="gallery-item relative rounded-xl overflow-hidden aspect-square bg-gradient-to-br from-primary-light to-primary flex items-center justify-center text-5xl cursor-pointer transition-all hover:scale-[1.02] row-span-2">
+          🎭
+          <div class="gallery-overlay absolute inset-0 bg-primary/70 flex items-center justify-center opacity-0 transition-opacity text-white text-[0.85rem] font-semibold">📸 ශිෂ්‍ය දිනය</div>
+        </div>
+        <div class="gallery-item relative rounded-xl overflow-hidden aspect-square bg-gradient-to-br from-primary-dark to-primary-light flex items-center justify-center text-5xl cursor-pointer transition-all hover:scale-[1.02]">
+          📚
+          <div class="gallery-overlay absolute inset-0 bg-primary/70 flex items-center justify-center opacity-0 transition-opacity text-white text-[0.85rem] font-semibold">📸 ඉගෙනීම</div>
+        </div>
+        <div class="gallery-item relative rounded-xl overflow-hidden aspect-square bg-gradient-to-br from-primary to-accent flex items-center justify-center text-5xl cursor-pointer transition-all hover:scale-[1.02]">
+          🏏
+          <div class="gallery-overlay absolute inset-0 bg-primary/70 flex items-center justify-center opacity-0 transition-opacity text-white text-[0.85rem] font-semibold">📸 ක්‍රීඩා</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAFF -->
+  <section id="staff" class="py-20 px-6 bg-light-bg">
+    <div class="max-w-6xl mx-auto">
+      <span class="inline-block bg-primary/[0.08] text-primary text-[0.75rem] font-bold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">කාර්ය මණ්ඩලය</span>
+      <h2 class="font-serif-sinhala text-[2rem] font-bold text-primary mb-4 leading-[1.3]">අධ්‍යාපන කාර්ය මණ්ඩලය</h2>
+      <div class="w-[50px] h-1 bg-accent rounded mb-8"></div>
+      <div class="bg-white rounded-2xl overflow-hidden border border-primary/10 mt-2">
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-primary">
+                <th class="text-left px-5 py-4 text-white text-[0.85rem] font-semibold">ගුරු විෂය වගකීම</th>
+                <th class="text-left px-5 py-4 text-white text-[0.85rem] font-semibold">සිටිය යුතු</th>
+                <th class="text-left px-5 py-4 text-white text-[0.85rem] font-semibold">සිටිනු</th>
+                <th class="text-left px-5 py-4 text-white text-[0.85rem] font-semibold">ලැගස</th>
+                <th class="text-left px-5 py-4 text-white text-[0.85rem] font-semibold">අතිරික්ත</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-100 hover:bg-light-bg transition-colors">
+                <td class="px-5 py-3.5 text-[0.85rem] font-semibold text-brand">විදුහල්පතිවරු</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+              </tr>
+              <tr class="border-b border-gray-100 hover:bg-light-bg transition-colors">
+                <td class="px-5 py-3.5 text-[0.85rem] font-semibold text-brand">නියෝජ්‍ය විදුහල්පතිවරු</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+              </tr>
+              <tr class="border-b border-gray-100 hover:bg-light-bg transition-colors">
+                <td class="px-5 py-3.5 text-[0.85rem] font-semibold text-brand">ප්‍රාථමික අංශය (1-5) — ප්‍රාථමික පොදු</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">20</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">18</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">02</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+              </tr>
+              <tr class="border-b border-gray-100 hover:bg-light-bg transition-colors">
+                <td class="px-5 py-3.5 text-[0.85rem] font-semibold text-brand">ප්‍රාථමික අංශය (1-5) — ඉංග්‍රීසි</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">02</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">02</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+              </tr>
+              <tr class="border-b border-gray-100 hover:bg-light-bg transition-colors">
+                <td class="px-5 py-3.5 text-[0.85rem] font-semibold text-brand">ශිෂ්‍ය උපදේශනය</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+              </tr>
+              <tr class="border-b border-gray-100 hover:bg-light-bg transition-colors">
+                <td class="px-5 py-3.5 text-[0.85rem] font-semibold text-brand">සුස්ථකාල කටයුතු</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+              </tr>
+              <tr class="border-b border-gray-100 hover:bg-light-bg transition-colors">
+                <td class="px-5 py-3.5 text-[0.85rem] font-semibold text-brand">යොෂ්ඩායර්</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">01</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-500">-</td>
+              </tr>
+              <tr class="bg-primary/5">
+                <td class="px-5 py-3.5 text-[0.85rem] font-bold text-primary">මුළු ගුරු සාමාකව</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-700 font-bold">27</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-700 font-bold">22</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-700 font-bold">05</td>
+                <td class="px-5 py-3.5 text-[0.85rem] text-gray-700 font-bold">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHOOL MAP -->
+  <section id="schoolmap" class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <span class="inline-block bg-primary/[0.08] text-primary text-[0.75rem] font-bold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">පාසල් සිතියම</span>
+      <h2 class="font-serif-sinhala text-[2rem] font-bold text-primary mb-4 leading-[1.3]">පාසල පිහිටීම</h2>
+      <div class="w-[50px] h-1 bg-accent rounded mb-6"></div>
+      <div class="mt-4 rounded-2xl overflow-hidden border-2 border-primary/[0.12] bg-light-bg aspect-video flex items-center justify-center relative">
+        <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" class="w-full h-full absolute inset-0">
+          <rect width="900" height="400" fill="#e8eaf6"/>
+          <rect x="0" y="350" width="900" height="50" fill="#b0bec5"/>
+          <rect x="0" y="366" width="900" height="4" fill="white" opacity="0.5"/>
+          <rect x="0" y="0" width="50" height="400" fill="#b0bec5"/>
+          <rect x="22" y="0" width="4" height="400" fill="white" opacity="0.5"/>
+          <rect x="70" y="30" width="760" height="300" fill="#c5cae9" rx="4" stroke="#2f3094" stroke-width="2" stroke-dasharray="10,5"/>
+          <ellipse cx="650" cy="190" rx="130" ry="90" fill="#a5d6a7" stroke="#66bb6a" stroke-width="2"/>
+          <text x="650" y="195" text-anchor="middle" font-size="14" fill="#2e7d32" font-family="sans-serif">ක්‍රීඩා පිටිය</text>
+          <rect x="260" y="50" width="120" height="45" fill="#2f3094" rx="3"/>
+          <text x="320" y="79" text-anchor="middle" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">07</text>
+          <rect x="80" y="120" width="160" height="40" fill="#3949ab" rx="3"/>
+          <text x="160" y="146" text-anchor="middle" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">01</text>
+          <rect x="80" y="175" width="160" height="40" fill="#3949ab" rx="3"/>
+          <text x="160" y="201" text-anchor="middle" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">02</text>
+          <rect x="80" y="230" width="160" height="40" fill="#3949ab" rx="3"/>
+          <text x="160" y="256" text-anchor="middle" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">03</text>
+          <rect x="80" y="285" width="160" height="40" fill="#3949ab" rx="3"/>
+          <text x="160" y="311" text-anchor="middle" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">04</text>
+          <rect x="80" y="340" width="160" height="35" fill="#3949ab" rx="3"/>
+          <text x="160" y="363" text-anchor="middle" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">05</text>
+          <rect x="460" y="260" width="180" height="80" fill="#b9202f" rx="3"/>
+          <text x="550" y="305" text-anchor="middle" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">10</text>
+          <rect x="220" y="340" width="30" height="20" fill="#ffd54f" rx="2"/>
+          <text x="235" y="355" text-anchor="middle" font-size="9" fill="#333" font-family="sans-serif">ද්වාරය</text>
+          <circle cx="830" cy="60" r="25" fill="white" stroke="#2f3094" stroke-width="2"/>
+          <text x="830" y="45" text-anchor="middle" font-size="11" fill="#b9202f" font-family="sans-serif" font-weight="bold">N</text>
+          <text x="830" y="75" text-anchor="middle" font-size="10" fill="#555" font-family="sans-serif">S</text>
+          <text x="815" y="65" text-anchor="middle" font-size="10" fill="#555" font-family="sans-serif">W</text>
+          <text x="845" y="65" text-anchor="middle" font-size="10" fill="#555" font-family="sans-serif">E</text>
+          <text x="450" y="22" text-anchor="middle" font-size="15" fill="#1e1f6b" font-family="sans-serif" font-weight="bold">බ/විද්‍යාලෝක ප්‍රාථමික විද්‍යාලය — පාසල් සිතියම</text>
+        </svg>
+        <div class="absolute bottom-2.5 right-3.5 bg-primary/75 text-white text-[0.72rem] px-2.5 py-1 rounded-md">
+          🗺️ නිරූපණ සිතියම — ආදේශ කරන්න
+        </div>
+      </div>
+
+      <div class="bg-light-bg rounded-2xl p-8 mt-6">
+        <h3 class="font-serif-sinhala text-primary mb-6 text-[1rem] font-bold">ගොඩනැඟිලි ලැයිස්තුව</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">01</span>
+            වකුම් ශාලාව
+          </div>
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">02</span>
+            වකුම් ශාලාව
+          </div>
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">03</span>
+            චිරාජ ශාලාව
+          </div>
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">04</span>
+            චිගුනි ශාලාව
+          </div>
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">05</span>
+            චිදුර ශාලාව
+          </div>
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">06</span>
+            ගුරු නිවාසය
+          </div>
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">07</span>
+            සෙල්ලම් මළුව
+          </div>
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">08</span>
+            බුද් මළුව
+          </div>
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">09</span>
+            ක්‍රීඩා පිටිය
+          </div>
+          <div class="flex items-center gap-3 text-[0.85rem] text-gray-500 sm:col-span-2 lg:col-span-3">
+            <span class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-[0.75rem] font-bold shrink-0">10</span>
+            ප්‍රාථමික ඉගෙනුම් මධ්‍යස්ථානය සහිත ළමා ගොඩනැඟිල්ල (කාර්යාල, ශිෂ්‍ය නාය කාමරය, ශ්‍රව්‍යාදර්ශනාත්මක කාමරය)
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <span class="inline-block bg-primary/[0.08] text-primary text-[0.75rem] font-bold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">සම්බන්ධ වන්න</span>
+      <h2 class="font-serif-sinhala text-[2rem] font-bold text-primary mb-4 leading-[1.3]">අප හා සම්බන්ධ වන්න</h2>
+      <div class="w-[50px] h-1 bg-accent rounded mb-8"></div>
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 mt-4">
+        <div>
+          <h3 class="font-serif-sinhala text-[1.2rem] font-bold text-primary mb-6">සම්බන්ධ තොරතුරු</h3>
+          <div class="flex items-start gap-4 mb-6">
+            <div class="w-11 h-11 bg-primary/[0.08] rounded-[10px] flex items-center justify-center text-primary text-[1.1rem] shrink-0"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <strong class="block text-brand text-[0.9rem] mb-0.5">ලිපිනය</strong>
+              <p class="text-[0.85rem] text-gray-500 leading-[1.6]">බ/විද්‍යාලෝක ප්‍රාථමික විද්‍යාලය,<br>කැප්පෙටිපොල, ශ්‍රී ලංකාව.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 mb-6">
+            <div class="w-11 h-11 bg-primary/[0.08] rounded-[10px] flex items-center justify-center text-primary text-[1.1rem] shrink-0"><i class="fas fa-phone"></i></div>
+            <div>
+              <strong class="block text-brand text-[0.9rem] mb-0.5">දුරකථනය</strong>
+              <p class="text-[0.85rem] text-gray-500">+94 XX XXX XXXX (ප්‍රධාන)</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 mb-6">
+            <div class="w-11 h-11 bg-primary/[0.08] rounded-[10px] flex items-center justify-center text-primary text-[1.1rem] shrink-0"><i class="fas fa-envelope"></i></div>
+            <div>
+              <strong class="block text-brand text-[0.9rem] mb-0.5">විද්‍යුත් තැපෑල</strong>
+              <p class="text-[0.85rem] text-gray-500">info@vidyaloka.lk</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 mb-6">
+            <div class="w-11 h-11 bg-primary/[0.08] rounded-[10px] flex items-center justify-center text-primary text-[1.1rem] shrink-0"><i class="fas fa-clock"></i></div>
+            <div>
+              <strong class="block text-brand text-[0.9rem] mb-0.5">කාර්යාල වේලාව</strong>
+              <p class="text-[0.85rem] text-gray-500">සඳුදා – සිකුරාදා: 7:30 පෙ.ව – 3:30 ප.ව</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-light-bg rounded-2xl p-10">
+          <h3 class="font-serif-sinhala text-[1.1rem] text-primary mb-6 font-bold">පණිවිඩය යොමු කරන්න</h3>
+          <div id="form-success" class="hidden bg-green-100 border border-green-300 rounded-xl p-5 text-center mb-4">
+            <i class="fas fa-check-circle text-green-600 text-2xl mb-2 block"></i>
+            <strong class="text-green-700">ඔබේ පණිවිඩය සාර්ථකව යොමු කරන ලදී!</strong>
+            <p class="text-green-700 text-[0.85rem] mt-1">ඉක්මනින් ඔබ හා සම්බන්ධ වෙමු. ස්තූතියි!</p>
+          </div>
+          <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+            <input type="hidden" name="subject" value="බ/විද්‍යාලෝක ප්‍රාථමික විද්‍යාලය - නව සම්බන්ධතා පණිවිඩය">
+            <input type="hidden" name="from_name" value="Vidyaloka Primary School Website">
+            <input type="checkbox" name="botcheck" class="hidden">
+
+            <div class="mb-5">
+              <label class="block text-[0.82rem] font-semibold text-brand mb-1.5">ඔබේ නම *</label>
+              <input type="text" name="name" placeholder="ඔබේ සම්පූර්ණ නම ඇතුලත් කරන්න" required
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg font-[inherit] text-[0.9rem] bg-white outline-none transition-colors focus:border-primary">
+            </div>
+            <div class="mb-5">
+              <label class="block text-[0.82rem] font-semibold text-brand mb-1.5">විද්‍යුත් තැපෑල *</label>
+              <input type="email" name="email" placeholder="email@example.com" required
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg font-[inherit] text-[0.9rem] bg-white outline-none transition-colors focus:border-primary">
+            </div>
+            <div class="mb-5">
+              <label class="block text-[0.82rem] font-semibold text-brand mb-1.5">දුරකථන අංකය</label>
+              <input type="tel" name="phone" placeholder="+94 XX XXX XXXX"
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg font-[inherit] text-[0.9rem] bg-white outline-none transition-colors focus:border-primary">
+            </div>
+            <div class="mb-5">
+              <label class="block text-[0.82rem] font-semibold text-brand mb-1.5">විෂය</label>
+              <select name="subject_type" class="w-full px-4 py-3 border border-gray-200 rounded-lg font-[inherit] text-[0.9rem] bg-white outline-none transition-colors focus:border-primary">
+                <option>ශිෂ්‍ය ඇතුළත් කිරීම</option>
+                <option>ගෙවිම ගැන</option>
+                <option>ක්‍රියාකාරකම් ගැන</option>
+                <option>වෙනත්</option>
+              </select>
+            </div>
+            <div class="mb-5">
+              <label class="block text-[0.82rem] font-semibold text-brand mb-1.5">පණිවිඩය *</label>
+              <textarea name="message" placeholder="ඔබේ පණිවිඩය ලියන්න..." required
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg font-[inherit] text-[0.9rem] bg-white outline-none transition-colors focus:border-primary resize-y min-h-[120px]"></textarea>
+            </div>
+            <button type="submit" id="submit-btn"
+              class="w-full bg-accent text-brand px-8 py-3.5 rounded-lg font-bold text-[0.9rem] border-none cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(245,166,35,0.4)]">
+              <i class="fas fa-paper-plane mr-2"></i>
+              <span id="btn-text">පණිවිඩය යොමු කරන්න</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-primary-dark text-white pt-16 pb-8 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-11 h-11 bg-primary rounded-full flex items-center justify-center border-2 border-accent shrink-0">
+              <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24">
+                <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 12.5L5.5 12 12 8.5l6.5 3.5L12 15.5zm0 2.5l-7-3.82V17c0 2.21 3.13 4 7 4s7-1.79 7-4v-2.32L12 18z"/>
+              </svg>
+            </div>
+            <span class="font-serif-sinhala font-bold text-[0.95rem]">බ/විද්‍යාලෝක</span>
+          </div>
+          <p class="text-[0.85rem] opacity-70 leading-[1.8] mt-4">ශ්‍රී ලාංකීය දරුවන්ගේ ශ්‍රේෂ්ඨ අනාගතය ගොඩ නඟා ගැනීම සඳහා කැපවූ ප්‍රාථමික විද්‍යාලය.</p>
+        </div>
+        <div>
+          <h4 class="text-[0.9rem] font-bold text-accent mb-4">ශීඝ්‍ර සබැඳි</h4>
+          <ul class="list-none space-y-2">
+            <li><a href="#home" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">මුල් පිටුව</a></li>
+            <li><a href="#about" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">අප ගැන</a></li>
+            <li><a href="#history" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">ඉතිහාසය</a></li>
+            <li><a href="#vision" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">දැක්ම</a></li>
+            <li><a href="#goals" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">ඉලක්ක</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[0.9rem] font-bold text-accent mb-4">තොරතුරු</h4>
+          <ul class="list-none space-y-2">
+            <li><a href="#staff" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">ගුරු මණ්ඩලය</a></li>
+            <li><a href="#activities" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">ක්‍රියාකාරකම්</a></li>
+            <li><a href="#gallery" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">ඡායාරූප</a></li>
+            <li><a href="#schoolmap" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">පාසල් සිතියම</a></li>
+            <li><a href="#contact" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">අමතන්න</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[0.9rem] font-bold text-accent mb-4">සම්බන්ධ වන්න</h4>
+          <ul class="list-none space-y-2">
+            <li><a href="#" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">📍 කැප්පෙටිපොල</a></li>
+            <li><a href="#" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">📞 +94 XX XXX XXXX</a></li>
+            <li><a href="#" class="text-white/70 no-underline text-[0.85rem] hover:text-white transition-colors">✉️ info@vidyaloka.lk</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <p class="text-[0.8rem] opacity-60">© 2026 බ/විද්‍යාලෝක ප්‍රාථමික විද්‍යාලය. සියලු හිමිකම් ඇවිරිණ.</p>
+        <p class="text-[0.8rem] opacity-60">කැප්පෙටිපොල, ශ්‍රී ලංකාව</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCROLL TOP -->
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+    class="fixed bottom-8 right-8 w-[46px] h-[46px] bg-primary text-white border-none rounded-full cursor-pointer text-[1.1rem] hidden items-center justify-center shadow-[0_4px_20px_rgba(47,48,148,0.3)] z-[999] transition-all hover:-translate-y-0.5 hover:bg-primary-light"
+    id="scrollTopBtn">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('scrollTopBtn');
+      if (window.scrollY > 400) btn.style.display = 'flex';
+      else btn.style.display = 'none';
+    });
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a, nav ul a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+      navLinks.forEach(a => {
+        a.classList.remove('bg-primary', 'text-white');
+        if (a.getAttribute('href') === '#' + current) {
+          a.classList.add('bg-primary', 'text-white');
+        }
+      });
+    });
+
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        btn.disabled = true;
+        btnText.textContent = 'යොමු කරමින්...';
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(contactForm) });
+          const data = await res.json();
+          if (data.success) {
+            contactForm.style.display = 'none';
+            document.getElementById('form-success').classList.remove('hidden');
+          } else {
+            btn.disabled = false;
+            btnText.textContent = 'පණිවිඩය යොමු කරන්න';
+            alert('දෝෂයක් ඇති විය. කරුණාකර නැවත උත්සාහ කරන්න.');
+          }
+        } catch {
+          btn.disabled = false;
+          btnText.textContent = 'පණිවිඩය යොමු කරන්න';
+          alert('ජාල දෝෂයකි. කරුණාකර නැවත උත්සාහ කරන්න.');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
