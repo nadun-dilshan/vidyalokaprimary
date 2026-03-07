@@ -12,6 +12,7 @@
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;500;600;700;900&family=Noto+Serif+Sinhala:wght@400;600;700&display=swap"
     rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -94,11 +95,12 @@
     <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-[72px]">
       <a href="#home" class="flex items-center gap-3.5 no-underline">
         <div
-          class="w-[52px] h-[52px] bg-primary rounded-full flex items-center justify-center border-[3px] border-accent shrink-0">
-          <svg class="w-[30px] h-[30px] fill-white" viewBox="0 0 24 24">
+          class="w-[52px] h-[52px] bg-white rounded-full flex items-center justify-center border-[3px] border-accent shrink-0">
+          <!-- <svg class="w-[30px] h-[30px] fill-white" viewBox="0 0 24 24">
             <path
               d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 12.5L5.5 12 12 8.5l6.5 3.5L12 15.5zm0 2.5l-7-3.82V17c0 2.21 3.13 4 7 4s7-1.79 7-4v-2.32L12 18z" />
-          </svg>
+          </svg> -->
+          <img src="./images/school-logo.webp" alt="School Logo" class="w-[34px] h-[34px] object-contain" />
         </div>
         <div>
           <h1 class="font-serif-sinhala text-[0.95rem] font-bold text-primary leading-tight"
@@ -156,28 +158,28 @@
 
     <div class="lg:hidden border-t border-gray-200 px-6 py-4" :class="{ 'block': mobileOpen, 'hidden': !mobileOpen }">
       <a href="#home" @click="mobileOpen=false"
-        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="🏠 Home"
-        data-si="🏠 මුල් පිටුව">🏠 Home</a>
+        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="Home"
+        data-si="මුල් පිටුව">Home</a>
       <a href="#about" @click="mobileOpen=false"
-        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="📚 About"
-        data-si="📚 අප ගැන">📚 About</a>
+        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="About"
+        data-si="අප ගැන">About</a>
       <a href="#vision" @click="mobileOpen=false"
-        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100"
-        data-en="🎯 Vision & Mission" data-si="🎯 දැක්ම හා මෙහෙවර">🎯 Vision & Mission</a>
+        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="Vision & Mission"
+        data-si="දැක්ම හා මෙහෙවර">Vision & Mission</a>
       <a href="#history" @click="mobileOpen=false"
-        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="📖 History"
-        data-si="📖 ඉතිහාසය">📖 History</a>
+        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="History"
+        data-si="ඉතිහාසය">History</a>
       <a href="#activities" @click="mobileOpen=false"
-        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="🎨 Activities"
-        data-si="🎨 ක්‍රියාකාරකම්">🎨 Activities</a>
+        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="Activities"
+        data-si="ක්‍රියාකාරකම්">Activities</a>
       <a href="#gallery" @click="mobileOpen=false"
-        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="📸 Gallery"
-        data-si="📸 ඡායාරූප">📸 Gallery</a>
+        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="Gallery"
+        data-si="ඡායාරූප">Gallery</a>
       <a href="#staff" @click="mobileOpen=false"
-        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="👨‍🏫 Staff"
-        data-si="👨‍🏫 කාර්ය මණ්ඩලය">👨‍🏫 Staff</a>
+        class="block py-2.5 text-brand no-underline text-[0.9rem] border-b border-gray-100" data-en="Staff"
+        data-si="කාර්ය මණ්ඩලය">Staff</a>
       <a href="#contact" @click="mobileOpen=false" class="block py-2.5 text-brand no-underline text-[0.9rem]"
-        data-en="📞 Contact" data-si="📞 අමතන්න">📞 Contact</a>
+        data-en="Contact" data-si="අමතන්න">Contact</a>
     </div>
   </nav>
 
@@ -277,7 +279,8 @@
           class="vm-card bg-white rounded-2xl p-10 border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(47,48,148,0.12)] relative overflow-hidden">
           <div
             class="w-[60px] h-[60px] bg-primary/[0.08] rounded-[14px] flex items-center justify-center mb-6 text-[1.6rem]">
-            🌟</div>
+            <i class="fas fa-eye text-accent"></i>
+          </div>
           <h3 class="font-serif-sinhala text-[1.1rem] font-bold text-primary mb-4" data-en="Our Vision"
             data-si="අපේ දැක්ම">Our Vision</h3>
           <p class="text-gray-500 leading-[1.8] text-[0.88rem]"
@@ -289,7 +292,8 @@
           class="vm-card bg-white rounded-2xl p-10 border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(47,48,148,0.12)] relative overflow-hidden">
           <div
             class="w-[60px] h-[60px] bg-primary/[0.08] rounded-[14px] flex items-center justify-center mb-6 text-[1.6rem]">
-            💫</div>
+            <i class="fas fa-rocket text-accent"></i>
+          </div>
           <h3 class="font-serif-sinhala text-[1.1rem] font-bold text-primary mb-4" data-en="Our Mission"
             data-si="අපේ මෙහෙවර">Our Mission</h3>
           <p class="text-gray-500 leading-[1.8] text-[0.88rem]"
@@ -302,7 +306,8 @@
           class="vm-card bg-white rounded-2xl p-10 border border-primary/[0.08] transition-all hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(47,48,148,0.12)] relative overflow-hidden">
           <div
             class="w-[60px] h-[60px] bg-primary/[0.08] rounded-[14px] flex items-center justify-center mb-6 text-[1.6rem]">
-            🎯</div>
+            <i class="fas fa-bullseye text-accent"></i>
+          </div>
           <h3 class="font-serif-sinhala text-[1.1rem] font-bold text-primary mb-4" data-en="Our Objective"
             data-si="අපේ අරමුණ">Our Objective</h3>
           <p class="text-gray-500 leading-[1.8] text-[0.88rem]"
@@ -835,11 +840,9 @@
         <div>
           <div class="flex items-center gap-3 mb-2">
             <div
-              class="w-11 h-11 bg-primary rounded-full flex items-center justify-center border-2 border-accent shrink-0">
-              <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24">
-                <path
-                  d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 12.5L5.5 12 12 8.5l6.5 3.5L12 15.5zm0 2.5l-7-3.82V17c0 2.21 3.13 4 7 4s7-1.79 7-4v-2.32L12 18z" />
-              </svg>
+              class="w-11 h-11 bg-white rounded-full flex items-center justify-center border-2 border-accent shrink-0">
+
+              <img src="./images/school-logo.webp" alt="School Logo" class="w-[28px] h-[28px] object-contain" />
             </div>
             <span class="font-serif-sinhala font-bold text-[0.95rem]" data-en="B/Vidyaloka Primary School"
               data-si="බ/විද්‍යාලෝක ප්‍රාථමික විද්‍යාලය">B/Vidyaloka Primary School</span>
